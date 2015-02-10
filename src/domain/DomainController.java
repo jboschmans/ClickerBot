@@ -15,6 +15,8 @@ public class DomainController
     {
         er = new EventRepository();
         
+        System.out.print("ladida");
+        
         hf = new HomeFrame();
         hf.addWindowListener(new WindowAdapter() {
             @Override
