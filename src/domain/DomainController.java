@@ -69,9 +69,6 @@ public class DomainController
                 case WAITFORCOLOR:
                     type = "WaitForColor";
                     break;
-                case EXECUTEWHENCOLOR:
-                    type = "ExecuteIfColor";
-                    break;
                 default:
                     type = "Click";
                     break;

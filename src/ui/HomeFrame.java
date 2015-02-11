@@ -253,7 +253,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
             }
         });
 
-        jButtonAddColor.setText("Add GetColor");
+        jButtonAddColor.setText("Wait For Color");
         jButtonAddColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddColorActionPerformed(evt);
@@ -526,9 +526,9 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                                             robot.keyRelease(KeyEvent.VK_SHIFT);
                                     }
                                 case WAITFORCOLOR:
-                                    while(true)
+                                    while(goon)
                                     {
-                                        if (list.get(j).getColor() == robot.getPixelColor(list.get(j).getMouseX(), list.get(j).getMouseY()))
+                                        if (list.get(j).getColor().toString().equals(robot.getPixelColor(list.get(j).getMouseX(), list.get(j).getMouseY()).toString()))
                                             break;
                                         Thread.sleep(250);
                                     }
@@ -650,7 +650,6 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                     isf.setLocationRelativeTo(null);
                     isf.setVisible(true);
                     break;
-                case EXECUTEWHENCOLOR:
                 case WAITFORCOLOR:
                     AddColorFrame acof = new AddColorFrame(i[0],e.getMinPause(),e.getMaxPause(),e.getMouseX(),e.getMouseY(),e.getColor());
                     acof.setLocationRelativeTo(null);

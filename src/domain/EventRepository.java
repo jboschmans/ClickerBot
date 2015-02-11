@@ -58,7 +58,6 @@ public class EventRepository implements java.io.Serializable
                 break;
                 
             case WAITFORCOLOR:
-            case EXECUTEWHENCOLOR:
                 if (minP == maxP)//zonder randol
                     eventList.add(new Event(type,x,y,minP,color));
                 else//met random

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Event implements java.io.Serializable
 {
-    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING, WAITFORCOLOR, EXECUTEWHENCOLOR};
+    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING, WAITFORCOLOR};
     private Type type;
     private String key = "", string = "";
     private Color color = Color.WHITE;

@@ -349,7 +349,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAddColor">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add GetColor"/>
+        <Property name="text" type="java.lang.String" value="Wait For Color"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddColorActionPerformed"/>
