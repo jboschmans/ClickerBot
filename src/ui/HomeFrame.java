@@ -6,6 +6,7 @@
 package ui;
 import domain.DomainController;
 import domain.Event;
+import java.awt.Color;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -136,6 +137,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         jButtonUp = new javax.swing.JButton();
         jButtonReleaseAllKeys = new javax.swing.JButton();
         jButtonInputString = new javax.swing.JButton();
+        jButtonAddColor = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -251,6 +253,13 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
             }
         });
 
+        jButtonAddColor.setText("Add GetColor");
+        jButtonAddColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddColorActionPerformed(evt);
+            }
+        });
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
 
@@ -312,9 +321,12 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                             .addComponent(jButtonAddMouseMovePlusClick, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAddOneKey, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonReleaseAllKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonInputString, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonInputString, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonAddOneKey, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddColor, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,7 +351,8 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddClick, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAddOneKey, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAddOneKey, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddColor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddMouseMove, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -512,6 +525,13 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                                         if (shift)
                                             robot.keyRelease(KeyEvent.VK_SHIFT);
                                     }
+                                case WAITFORCOLOR:
+                                    while(true)
+                                    {
+                                        if (list.get(j).getColor() == robot.getPixelColor(list.get(j).getMouseX(), list.get(j).getMouseY()))
+                                            break;
+                                        Thread.sleep(250);
+                                    }
                                 default:
                                     break;
                             }
@@ -630,6 +650,11 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                     isf.setLocationRelativeTo(null);
                     isf.setVisible(true);
                     break;
+                case EXECUTEWHENCOLOR:
+                case WAITFORCOLOR:
+                    AddColorFrame acof = new AddColorFrame(i[0],e.getMinPause(),e.getMaxPause(),e.getMouseX(),e.getMouseY(),e.getColor());
+                    acof.setLocationRelativeTo(null);
+                    acof.setVisible(true);
                 default:
                     break;
             }
@@ -717,7 +742,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         }
         else
             return;
-        DomainController.addEvent(Event.Type.RELEASEALLKEYS, minp, maxp, -1, -1, false, false, false, "", "");
+        DomainController.addEvent(Event.Type.RELEASEALLKEYS, minp, maxp, -1, -1, false, false, false, "", "", Color.white);
         tm.fireTableDataChanged();
     }//GEN-LAST:event_jButtonReleaseAllKeysActionPerformed
 
@@ -739,6 +764,12 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         }
     }//GEN-LAST:event_jTextFieldLoopKeyReleased
 
+    private void jButtonAddColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddColorActionPerformed
+        AddColorFrame acof = new AddColorFrame();
+        acof.setLocationRelativeTo(null);
+        acof.setVisible(true);
+    }//GEN-LAST:event_jButtonAddColorActionPerformed
+
     
     
 
@@ -746,6 +777,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButtonAddClick;
+    private javax.swing.JButton jButtonAddColor;
     private javax.swing.JButton jButtonAddMouseMove;
     private javax.swing.JButton jButtonAddMouseMovePlusClick;
     private javax.swing.JButton jButtonAddOneKey;

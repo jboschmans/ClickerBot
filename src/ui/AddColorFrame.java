@@ -7,12 +7,11 @@ package ui;
 import domain.DomainController;
 import java.awt.Color;
 import java.awt.MouseInfo;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -20,7 +19,7 @@ import javax.swing.Timer;
  *
  * @author Gebruiker
  */
-public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements KeyListener {
+public class AddColorFrame extends javax.swing.JFrame implements KeyListener {
 
     Timer t;
     private int x, y;
@@ -28,7 +27,35 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
     /**
      * Creates new form AddMoveMouseFrame
      */
-    public AddMoveMousePlusClickFrame(){
+    public AddColorFrame(){
+        initComponents();
+        t = new Timer(100, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                if (jToggleButtonGetMouseLocation.isSelected())
+                {
+                    try
+                    {
+                        Robot r = new Robot();
+                        jLabelX.setText(String.format("X: %d", MouseInfo.getPointerInfo().getLocation().x));
+                        jLabelY.setText(String.format("Y: %d", MouseInfo.getPointerInfo().getLocation().y));
+                        x = MouseInfo.getPointerInfo().getLocation().x;
+                        y = MouseInfo.getPointerInfo().getLocation().y;
+                        jTextFieldColor.setBackground(r.getPixelColor(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y));
+                    }
+                    catch(Exception exc)
+                    {exc.printStackTrace();};
+                }
+            }
+        });
+        addKeyListener(this);
+        this.requestFocus();
+    }
+    
+    public AddColorFrame(int i, long minp, long maxp, int mx, int my, Color color)
+    {
         initComponents();
         t = new Timer(100, new ActionListener()
         {
@@ -46,23 +73,8 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
         });
         addKeyListener(this);
         this.requestFocus();
-    }
-    
-    public AddMoveMousePlusClickFrame(int i, String click, long minp, long maxp, int mx, int my)
-    {
-        initComponents();
-        switch (click)
-        {
-            case "left":
-                this.buttonGroupClick.setSelected(this.jRadioButtonLeft.getModel(), true);
-                break;
-            case "middle":
-                this.buttonGroupClick.setSelected(this.jRadioButtonMiddle.getModel(), true);
-                break;
-            case "right":
-                this.buttonGroupClick.setSelected(this.jRadioButtonRight.getModel(), true);
-                break;
-        }
+        
+        
         if (minp == maxp)
         {
             this.jTextFieldPause.setText(String.format("%d", minp));
@@ -84,6 +96,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
         y = my;
         this.jLabelX.setText(String.format("X: %d", x));
         this.jLabelY.setText(String.format("Y: %d", y));
+        this.jTextFieldColor.setBackground(color);
         number = i;
         this.jButtonAdd.setText("Modify");
     }
@@ -97,7 +110,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroupClick = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButtonAdd = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -114,9 +127,10 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
         jLabel7 = new javax.swing.JLabel();
         jLabelX = new javax.swing.JLabel();
         jLabelY = new javax.swing.JLabel();
-        jRadioButtonLeft = new javax.swing.JRadioButton();
-        jRadioButtonRight = new javax.swing.JRadioButton();
-        jRadioButtonMiddle = new javax.swing.JRadioButton();
+        jTextFieldColor = new javax.swing.JTextField();
+        jRadioButtonWait = new javax.swing.JRadioButton();
+        jRadioButtonSkip = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add MoveMouse");
@@ -167,100 +181,93 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
         jTextFieldMaxPause.setText("1");
         jTextFieldMaxPause.setEnabled(false);
 
-        jToggleButtonGetMouseLocation.setText("Get Mouse Location");
+        jToggleButtonGetMouseLocation.setText("Get Mouse Location And Color");
         jToggleButtonGetMouseLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButtonGetMouseLocationActionPerformed(evt);
             }
         });
 
-        jLabel7.setText(" (Press \"C\" to record current mouse position)");
+        jLabel7.setText(" (Press \"C\" to record current mouse position and color)");
 
         jLabelX.setText("X: 0");
 
         jLabelY.setText("Y: 0");
 
-        buttonGroupClick.add(jRadioButtonLeft);
-        jRadioButtonLeft.setSelected(true);
-        jRadioButtonLeft.setText("Left Click");
+        buttonGroup1.add(jRadioButtonWait);
+        jRadioButtonWait.setText("Wait until color is correct");
 
-        buttonGroupClick.add(jRadioButtonRight);
-        jRadioButtonRight.setText("Right Click");
+        buttonGroup1.add(jRadioButtonSkip);
+        jRadioButtonSkip.setSelected(true);
+        jRadioButtonSkip.setText("Skip");
 
-        buttonGroupClick.add(jRadioButtonMiddle);
-        jRadioButtonMiddle.setText("Middle Click");
+        jLabel8.setText("What would you like to do if the color is not correct?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(109, 109, 109)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelX, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelY, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonSkip)
+                                    .addComponent(jRadioButtonWait)
+                                    .addComponent(jToggleButtonGetMouseLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldPause)
+                            .addComponent(jTextFieldMinPause)
+                            .addComponent(jTextFieldMaxPause))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxRandomize)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jRadioButtonLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButtonMiddle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jRadioButtonRight))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jToggleButtonGetMouseLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(40, 40, 40))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelX, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelY, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(59, 59, 59)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldPause, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(jTextFieldMinPause)
-                    .addComponent(jTextFieldMaxPause))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBoxRandomize)
-                .addContainerGap())
+                        .addGap(144, 144, 144))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jTextFieldPause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jCheckBoxRandomize))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelX)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelY, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldPause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jCheckBoxRandomize))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextFieldMinPause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,18 +278,22 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
                             .addComponent(jTextFieldMaxPause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jRadioButtonLeft)
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButtonMiddle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonRight))
-                            .addComponent(jToggleButtonGetMouseLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(jLabelX)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelY, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jToggleButtonGetMouseLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonSkip)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonWait)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -304,9 +315,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         long minPause=1, maxPause=1;
 
-        if (!jRadioButtonLeft.isSelected() && !jRadioButtonMiddle.isSelected() && !jRadioButtonRight.isSelected())
-            JOptionPane.showMessageDialog(this, "You must select a type.", "Error", JOptionPane.ERROR_MESSAGE);
-        else if (!jCheckBoxRandomize.isSelected() && jTextFieldPause.getText().length() == 0)
+        if (!jCheckBoxRandomize.isSelected() && jTextFieldPause.getText().length() == 0)
         jTextFieldPause.setText("1");
         else if (jCheckBoxRandomize.isSelected() && jTextFieldMinPause.getText().length() == 0)
         jTextFieldMinPause.setText("1");
@@ -340,18 +349,20 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
                     return;
                 }
             }
+            Color color = jTextFieldColor.getBackground();
+            domain.Event.Type type = (jRadioButtonSkip.isSelected()) ? domain.Event.Type.EXECUTEWHENCOLOR : domain.Event.Type.WAITFORCOLOR;
             if (number == -1)
-                DomainController.addEvent(domain.Event.Type.MOVEMOUSEPLUSCLICK, minPause, maxPause, x, y, jRadioButtonLeft.isSelected(), jRadioButtonRight.isSelected(), jRadioButtonMiddle.isSelected(), "", "", Color.white);
+                DomainController.addEvent(type, minPause, maxPause, x, y, false, false, false, "", "", color);
             else
             {
-                DomainController.er.getEventList().get(number).setLeftClick(jRadioButtonLeft.isSelected());
-                DomainController.er.getEventList().get(number).setMiddleClick(jRadioButtonMiddle.isSelected());
-                DomainController.er.getEventList().get(number).setRightClick(jRadioButtonRight.isSelected());
                 DomainController.er.getEventList().get(number).setMinPause(minPause);
                 DomainController.er.getEventList().get(number).setMaxPause(maxPause);
                 DomainController.er.getEventList().get(number).setMouseX(x);
                 DomainController.er.getEventList().get(number).setMouseY(y);
+                DomainController.er.getEventList().get(number).setColor(color);
+                DomainController.er.getEventList().get(number).setType(type);
             }
+            
             DomainController.hf.updateTable();
         }
         this.dispose();
@@ -396,7 +407,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroupClick;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JCheckBox jCheckBoxRandomize;
@@ -407,11 +418,12 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelX;
     private javax.swing.JLabel jLabelY;
-    private javax.swing.JRadioButton jRadioButtonLeft;
-    private javax.swing.JRadioButton jRadioButtonMiddle;
-    private javax.swing.JRadioButton jRadioButtonRight;
+    private javax.swing.JRadioButton jRadioButtonSkip;
+    private javax.swing.JRadioButton jRadioButtonWait;
+    private javax.swing.JTextField jTextFieldColor;
     private javax.swing.JTextField jTextFieldMaxPause;
     private javax.swing.JTextField jTextFieldMinPause;
     private javax.swing.JTextField jTextFieldPause;

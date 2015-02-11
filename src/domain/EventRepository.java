@@ -1,5 +1,6 @@
 package domain;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class EventRepository implements java.io.Serializable
@@ -8,7 +9,7 @@ public class EventRepository implements java.io.Serializable
     private final Object[] columnNames = {"Type","Button/Key/Text","x","y","Min. pauze","Max. pause"};
     private int numberOfLoops = 1;
     
-    public void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string)
+    public void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color)
     {
         switch(type)
         {
@@ -54,6 +55,14 @@ public class EventRepository implements java.io.Serializable
                     eventList.add(new Event(type,minP,"",string));
                 else//met random
                     eventList.add(new Event(type,minP,maxP,"",string));
+                break;
+                
+            case WAITFORCOLOR:
+            case EXECUTEWHENCOLOR:
+                if (minP == maxP)//zonder randol
+                    eventList.add(new Event(type,x,y,minP,color));
+                else//met random
+                    eventList.add(new Event(type,x,y,minP,maxP,color));
                 break;
                 
             default:

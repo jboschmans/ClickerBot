@@ -1,10 +1,13 @@
 package domain;
 
+import java.awt.Color;
+
 public class Event implements java.io.Serializable
 {
-    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING};
+    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING, WAITFORCOLOR, EXECUTEWHENCOLOR};
     private Type type;
     private String key = "", string = "";
+    private Color color = Color.WHITE;
     private long minPause, maxPause;
     private int mouseX, mouseY;
     private boolean leftClick, rightClick, middleClick;
@@ -118,6 +121,25 @@ public class Event implements java.io.Serializable
         this.setMinPause(minp);
         this.setMaxPause(maxp);
     }
+    public Event(Type t, int x, int y, long p, Color c) // WaitForColor of ExecuteWhenColor zonder random
+    {
+        this.setType(t);
+        this.setMinPause(p);
+        this.setMaxPause(p);
+        this.setColor(c);
+        this.setMouseX(x);
+        this.setMouseY(y);
+    }
+    
+    public Event(Type t, int x, int y, long minp, long maxp, Color c) // WaitForColor of ExecuteWhenColor met random
+    {
+        this.setType(t);
+        this.setMinPause(minp);
+        this.setMaxPause(maxp);
+        this.setColor(c);
+        this.setMouseX(x);
+        this.setMouseY(y);
+    }
     
     
     // Setters and Getters
@@ -195,5 +217,15 @@ public class Event implements java.io.Serializable
     public void setString(String string) {
         this.string = string;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
+    
     
 }

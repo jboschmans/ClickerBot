@@ -1,6 +1,7 @@
 package domain;
 import ui.*;
 import data.*;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -28,9 +29,9 @@ public class DomainController
         hf.setVisible(true);
     }
     
-    public static void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string)
+    public static void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color)
     {
-        er.addEvent(type,  minP,  maxP,  x,  y,  left,  right,  middle, key, string);
+        er.addEvent(type,  minP,  maxP,  x,  y,  left,  right,  middle, key, string, color);
     }
 
     public static Object[][] getData()
@@ -64,6 +65,12 @@ public class DomainController
                     break;
                 case STRING:
                     type = "InputString";
+                    break;
+                case WAITFORCOLOR:
+                    type = "WaitForColor";
+                    break;
+                case EXECUTEWHENCOLOR:
+                    type = "ExecuteIfColor";
                     break;
                 default:
                     type = "Click";

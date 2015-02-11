@@ -270,7 +270,7 @@ public class InputStringFrame extends javax.swing.JFrame {
                 }
             }
             if(number == -1)
-                DomainController.addEvent(Event.Type.STRING, minPause, maxPause, 0, 0, false, false, false, "", jTextFieldInput.getText());
+                DomainController.addEvent(Event.Type.STRING, minPause, maxPause, 0, 0, false, false, false, "", jTextFieldInput.getText(), Color.white);
             else
             {
                 DomainController.er.getEventList().get(number).setMinPause(minPause);

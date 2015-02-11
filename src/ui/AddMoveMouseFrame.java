@@ -320,7 +320,7 @@ public class AddMoveMouseFrame extends javax.swing.JFrame implements KeyListener
                 }
             }
             if (number == -1)
-                DomainController.addEvent(domain.Event.Type.MOVEMOUSE, minPause, maxPause, x, y, false, false, false, "", "");
+                DomainController.addEvent(domain.Event.Type.MOVEMOUSE, minPause, maxPause, x, y, false, false, false, "", "", Color.white);
             else
             {
                 DomainController.er.getEventList().get(number).setMinPause(minPause);
