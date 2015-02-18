@@ -436,6 +436,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         {
             if (e.getType() == Event.Type.LOOP)
             {
+                e.setNumberOfLoopsCompleted(0);
                 insideLoops.add(e.getNumberOfLoopEvent());
             }
             else if (e.getType() == Event.Type.LOOPEND)
