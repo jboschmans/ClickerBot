@@ -312,16 +312,31 @@ public class AddOneKeyFrame extends javax.swing.JFrame {
 
         jTextFieldPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldPause.setText("1");
+        jTextFieldPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPauseActionPerformed(evt);
+            }
+        });
 
         jTextFieldMinPause.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldMinPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMinPause.setText("1");
         jTextFieldMinPause.setEnabled(false);
+        jTextFieldMinPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMinPauseActionPerformed(evt);
+            }
+        });
 
         jTextFieldMaxPause.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldMaxPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMaxPause.setText("1");
         jTextFieldMaxPause.setEnabled(false);
+        jTextFieldMaxPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMaxPauseActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("ms");
 
@@ -1031,6 +1046,18 @@ public class AddOneKeyFrame extends javax.swing.JFrame {
     private void jToggleButtonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonHomeActionPerformed
         
     }//GEN-LAST:event_jToggleButtonHomeActionPerformed
+
+    private void jTextFieldPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPauseActionPerformed
+        jButtonAdd.doClick();// TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPauseActionPerformed
+
+    private void jTextFieldMinPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinPauseActionPerformed
+        this.jTextFieldMaxPause.requestFocus();// TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMinPauseActionPerformed
+
+    private void jTextFieldMaxPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMaxPauseActionPerformed
+        jButtonAdd.doClick();// TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMaxPauseActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,6 +22,7 @@ public class AddClickFrame extends javax.swing.JFrame {
      */
     public AddClickFrame() {
         initComponents();
+        jTextFieldPause.requestFocus();
     }
     
     public AddClickFrame(int i, String click, long minp, long maxp)
@@ -57,6 +58,7 @@ public class AddClickFrame extends javax.swing.JFrame {
         }
         number = i;
         this.jButtonAdd.setText("Modify");
+        this.jTextFieldPause.requestFocus();
     }
 
     /**
@@ -106,16 +108,31 @@ public class AddClickFrame extends javax.swing.JFrame {
 
         jTextFieldPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldPause.setText("1");
+        jTextFieldPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPauseActionPerformed(evt);
+            }
+        });
 
         jTextFieldMinPause.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldMinPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMinPause.setText("1");
         jTextFieldMinPause.setEnabled(false);
+        jTextFieldMinPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMinPauseActionPerformed(evt);
+            }
+        });
 
         jTextFieldMaxPause.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldMaxPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMaxPause.setText("1");
         jTextFieldMaxPause.setEnabled(false);
+        jTextFieldMaxPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMaxPauseActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("ms");
 
@@ -290,6 +307,18 @@ public class AddClickFrame extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jTextFieldPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPauseActionPerformed
+        jButtonAdd.doClick();
+    }//GEN-LAST:event_jTextFieldPauseActionPerformed
+
+    private void jTextFieldMinPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinPauseActionPerformed
+        jTextFieldMaxPause.requestFocus();
+    }//GEN-LAST:event_jTextFieldMinPauseActionPerformed
+
+    private void jTextFieldMaxPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMaxPauseActionPerformed
+        jButtonAdd.doClick();
+    }//GEN-LAST:event_jTextFieldMaxPauseActionPerformed
 
     
 

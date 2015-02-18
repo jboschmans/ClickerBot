@@ -166,6 +166,11 @@ public class AddColorFrame extends javax.swing.JFrame implements KeyListener {
 
         jTextFieldPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldPause.setText("1");
+        jTextFieldPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPauseActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Max.Pause:");
 
@@ -177,11 +182,21 @@ public class AddColorFrame extends javax.swing.JFrame implements KeyListener {
         jTextFieldMinPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMinPause.setText("1");
         jTextFieldMinPause.setEnabled(false);
+        jTextFieldMinPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMinPauseActionPerformed(evt);
+            }
+        });
 
         jTextFieldMaxPause.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldMaxPause.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextFieldMaxPause.setText("1");
         jTextFieldMaxPause.setEnabled(false);
+        jTextFieldMaxPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMaxPauseActionPerformed(evt);
+            }
+        });
 
         jToggleButtonGetMouseLocation.setText("Get Mouse Location And Color");
         jToggleButtonGetMouseLocation.addActionListener(new java.awt.event.ActionListener() {
@@ -384,6 +399,18 @@ public class AddColorFrame extends javax.swing.JFrame implements KeyListener {
             t.stop();
         }
     }//GEN-LAST:event_jToggleButtonGetMouseLocationActionPerformed
+
+    private void jTextFieldPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPauseActionPerformed
+        jButtonAdd.doClick();
+    }//GEN-LAST:event_jTextFieldPauseActionPerformed
+
+    private void jTextFieldMinPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinPauseActionPerformed
+        jTextFieldMaxPause.requestFocus();
+    }//GEN-LAST:event_jTextFieldMinPauseActionPerformed
+
+    private void jTextFieldMaxPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMaxPauseActionPerformed
+        jButtonAdd.doClick();
+    }//GEN-LAST:event_jTextFieldMaxPauseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
