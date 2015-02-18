@@ -1008,7 +1008,7 @@ public class AddOneKeyFrame extends javax.swing.JFrame {
             ty = Event.Type.ONEKEYRELEASE;
         
         if(number == -1)
-            DomainController.addEvent(ty, minPause, maxPause, 0, 0, false, false, false, k, "", Color.white);
+            DomainController.addEvent(ty, minPause, maxPause, 0, 0, false, false, false, k, "", Color.white, 0, 0);
         else
         {
             DomainController.er.getEventList().get(number).setType(ty);

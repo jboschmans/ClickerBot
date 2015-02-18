@@ -277,7 +277,7 @@ public class AddClickFrame extends javax.swing.JFrame {
                 }
             }
             if(number == -1)
-                DomainController.addEvent(Event.Type.CLICK, minPause, maxPause, 0, 0, jRadioButtonLeft.isSelected(), jRadioButtonRight.isSelected(), jRadioButtonMiddle.isSelected(), "", "", Color.WHITE);
+                DomainController.addEvent(Event.Type.CLICK, minPause, maxPause, 0, 0, jRadioButtonLeft.isSelected(), jRadioButtonRight.isSelected(), jRadioButtonMiddle.isSelected(), "", "", Color.WHITE, 0, 0);
             else
             {
                 DomainController.er.getEventList().get(number).setLeftClick(jRadioButtonLeft.isSelected());

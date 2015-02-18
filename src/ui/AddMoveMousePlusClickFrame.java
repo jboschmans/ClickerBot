@@ -341,7 +341,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
                 }
             }
             if (number == -1)
-                DomainController.addEvent(domain.Event.Type.MOVEMOUSEPLUSCLICK, minPause, maxPause, x, y, jRadioButtonLeft.isSelected(), jRadioButtonRight.isSelected(), jRadioButtonMiddle.isSelected(), "", "", Color.white);
+                DomainController.addEvent(domain.Event.Type.MOVEMOUSEPLUSCLICK, minPause, maxPause, x, y, jRadioButtonLeft.isSelected(), jRadioButtonRight.isSelected(), jRadioButtonMiddle.isSelected(), "", "", Color.white, 0, 0);
             else
             {
                 DomainController.er.getEventList().get(number).setLeftClick(jRadioButtonLeft.isSelected());

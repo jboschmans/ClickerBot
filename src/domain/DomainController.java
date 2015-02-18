@@ -29,9 +29,9 @@ public class DomainController
         hf.setVisible(true);
     }
     
-    public static void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color)
+    public static void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color, int numberOfLoops, int loopEvent)
     {
-        er.addEvent(type,  minP,  maxP,  x,  y,  left,  right,  middle, key, string, color);
+        er.addEvent(type,  minP,  maxP,  x,  y,  left,  right,  middle, key, string, color, numberOfLoops, loopEvent);
     }
 
     public static Object[][] getData()
@@ -68,6 +68,12 @@ public class DomainController
                     break;
                 case WAITFORCOLOR:
                     type = "WaitForColor";
+                    break;
+                case LOOP:
+                    type = "START LOOP " + er.getEventList().get(rij).getNumberOfLoopEvent();
+                    break;
+                case LOOPEND:
+                    type = "END LOOP " + er.getEventList().get(rij).getNumberOfLoopEvent();
                     break;
                 default:
                     type = "Click";

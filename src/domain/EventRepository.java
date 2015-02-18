@@ -9,7 +9,7 @@ public class EventRepository implements java.io.Serializable
     private final Object[] columnNames = {"Type","Button/Key/Text","x","y","Min. pauze","Max. pause"};
     private int numberOfLoops = 1;
     
-    public void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color)
+    public void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color, int numberOfLoops, int loopEvent)
     {
         switch(type)
         {
@@ -62,6 +62,14 @@ public class EventRepository implements java.io.Serializable
                     eventList.add(new Event(type,x,y,minP,color));
                 else//met random
                     eventList.add(new Event(type,x,y,minP,maxP,color));
+                break;
+                
+            case LOOP:
+                eventList.add(new Event(type, numberOfLoops, loopEvent));
+                break;
+                
+            case LOOPEND:
+                eventList.add(new Event(type, loopEvent));
                 break;
                 
             default:

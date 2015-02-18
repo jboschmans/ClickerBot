@@ -16,3 +16,5 @@ hs_err_pid*
 /nbproject/
 /build/
 /dist/
+/ClickerBot2/build/
+/ClickerBot2/nbproject/private/

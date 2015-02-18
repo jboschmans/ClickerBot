@@ -138,6 +138,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         jButtonReleaseAllKeys = new javax.swing.JButton();
         jButtonInputString = new javax.swing.JButton();
         jButtonAddColor = new javax.swing.JButton();
+        jButtonAddLoop = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -260,6 +261,13 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
             }
         });
 
+        jButtonAddLoop.setText("Add Loop");
+        jButtonAddLoop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddLoopActionPerformed(evt);
+            }
+        });
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
 
@@ -321,7 +329,10 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                             .addComponent(jButtonAddMouseMovePlusClick, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonReleaseAllKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonReleaseAllKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButtonInputString, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonAddOneKey, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,7 +367,8 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddMouseMove, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonReleaseAllKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonReleaseAllKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -419,6 +431,20 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     }//GEN-LAST:event_jButtonAddMouseMovePlusClickActionPerformed
 
     private void jButtonPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlayActionPerformed
+        //Controle
+        ArrayList<Integer> insideLoops = new ArrayList<>();
+        for (Event e : DomainController.er.getEventList())
+        {
+            if (e.getType() == Event.Type.LOOP)
+            {
+                insideLoops.add(e.getNumberOfLoopEvent());
+            }
+            else if (e.getType() == Event.Type.LOOPEND)
+            {
+                int number = -1;
+                for (int i = 0)
+            }
+        }
         Thread playIt = new Thread()
         {
             @Override
@@ -741,7 +767,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         }
         else
             return;
-        DomainController.addEvent(Event.Type.RELEASEALLKEYS, minp, maxp, -1, -1, false, false, false, "", "", Color.white);
+        DomainController.addEvent(Event.Type.RELEASEALLKEYS, minp, maxp, -1, -1, false, false, false, "", "", Color.white, 0, 0);
         tm.fireTableDataChanged();
     }//GEN-LAST:event_jButtonReleaseAllKeysActionPerformed
 
@@ -769,6 +795,40 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         acof.setVisible(true);
     }//GEN-LAST:event_jButtonAddColorActionPerformed
 
+    private void jButtonAddLoopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddLoopActionPerformed
+        boolean gevonden = false;
+        int loopEvent = 0;
+        while (!gevonden)
+        {
+            loopEvent++;
+            gevonden = true;
+            for (Event e : DomainController.er.getEventList())
+            {
+                if (e.getNumberOfLoopEvent() == loopEvent)
+                {
+                    gevonden = false;
+                    break;
+                }
+            }
+        }
+        String s = JOptionPane.showInputDialog(null, "How many times would you like to loop?");
+        int numberOfLoops = 0;
+        try
+        {
+            numberOfLoops = Integer.parseInt(s);
+            if (numberOfLoops < 1)
+                throw new Exception();
+        }
+        catch(Exception exc)
+        {
+            JOptionPane.showMessageDialog(null, "You didn't enter a valid number of loops.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DomainController.addEvent(Event.Type.LOOP, 0, 0, 0, 0, false, false, false, "", "", Color.white, numberOfLoops, loopEvent);
+        DomainController.addEvent(Event.Type.LOOPEND, 0, 0, 0, 0, false, false, false, "", "", Color.white, 0, loopEvent);
+        tm.fireTableDataChanged();
+    }//GEN-LAST:event_jButtonAddLoopActionPerformed
+
     
     
 
@@ -777,6 +837,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButtonAddClick;
     private javax.swing.JButton jButtonAddColor;
+    private javax.swing.JButton jButtonAddLoop;
     private javax.swing.JButton jButtonAddMouseMove;
     private javax.swing.JButton jButtonAddMouseMovePlusClick;
     private javax.swing.JButton jButtonAddOneKey;

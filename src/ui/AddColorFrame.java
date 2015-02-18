@@ -333,7 +333,7 @@ public class AddColorFrame extends javax.swing.JFrame implements KeyListener {
             }
             Color color = jTextFieldColor.getBackground();
             if (number == -1)
-                DomainController.addEvent(domain.Event.Type.WAITFORCOLOR, minPause, maxPause, x, y, false, false, false, "", "", color);
+                DomainController.addEvent(domain.Event.Type.WAITFORCOLOR, minPause, maxPause, x, y, false, false, false, "", "", color, 0, 0);
             else
             {
                 DomainController.er.getEventList().get(number).setMinPause(minPause);

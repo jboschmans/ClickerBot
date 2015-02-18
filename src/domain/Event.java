@@ -4,12 +4,12 @@ import java.awt.Color;
 
 public class Event implements java.io.Serializable
 {
-    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING, WAITFORCOLOR};
+    public enum Type {CLICK, MOVEMOUSE, MOVEMOUSEPLUSCLICK, ONEKEY, ONEKEYPRESS, ONEKEYRELEASE, RELEASEALLKEYS, STRING, WAITFORCOLOR, LOOP, LOOPEND};
     private Type type;
     private String key = "", string = "";
     private Color color = Color.WHITE;
     private long minPause, maxPause;
-    private int mouseX, mouseY;
+    private int mouseX, mouseY, numberOfLoopTimes = 0, numberOfLoopEvent = -1, numberOfLoopsCompleted = 0;
     private boolean leftClick, rightClick, middleClick;
     
     public Event(Type t, long p, boolean left, boolean right, boolean middle) // indien enkel click zonder random
@@ -141,8 +141,50 @@ public class Event implements java.io.Serializable
         this.setMouseY(y);
     }
     
+    public Event(Type t, int loops, int numberOfLoop) // Loop
+    {
+        this.setType(t);
+        this.setMinPause(1);
+        this.setMaxPause(1);
+        this.setNumberOfLoopTimes(loops);
+        this.setNumberOfLoopEvent(numberOfLoop);
+        this.setNumberOfLoopsCompleted(0);
+    }
     
+    public Event(Type t, int numberOfLoop) // LoopEnd
+    {
+        this.setType(t);
+        this.setMinPause(1);
+        this.setMaxPause(1);
+        this.setNumberOfLoopEvent(numberOfLoop);
+    }
+
+    
+    
+    public int getNumberOfLoopsCompleted() {
+        return numberOfLoopsCompleted;
+    }
+
     // Setters and Getters
+    public void setNumberOfLoopsCompleted(int numberOfLoopsCompleted) {
+        this.numberOfLoopsCompleted = numberOfLoopsCompleted;
+    }
+
+    public int getNumberOfLoopEvent() {
+        return numberOfLoopEvent;
+    }
+
+    public void setNumberOfLoopEvent(int numberOfLoopEvent) {
+        this.numberOfLoopEvent = numberOfLoopEvent;
+    }
+    
+    public int getNumberOfLoopTimes() {
+        return numberOfLoopTimes;
+    }
+    public void setNumberOfLoopTimes(int numberOfLoopTimes) {    
+        this.numberOfLoopTimes = numberOfLoopTimes;
+    }
+
     public Type getType() {
         return type;
     }
