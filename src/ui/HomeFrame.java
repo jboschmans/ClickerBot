@@ -486,6 +486,10 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                     goon = true;
                     for (int i = 0; i < loops; i++)
                     {
+                        for (Event event : DomainController.er.getEventList())
+                            if (event.getType() == domain.Event.Type.LOOP)
+                                event.setNumberOfLoopsCompleted(0);
+                        
                         for (int j = 0; j < list.size(); j++)
                         {
                             switch(list.get(j).getType())
