@@ -89,6 +89,8 @@ public class DomainController
                 button = er.getEventList().get(rij).getKey();
             else if (er.getEventList().get(rij).getString().length() > 0)
                 button = er.getEventList().get(rij).getString();
+            else if (er.getEventList().get(rij).getType() == domain.Event.Type.LOOP)
+                button = String.format("%d times",er.getEventList().get(rij).getNumberOfLoopTimes());
             if (er.getEventList().get(rij).getMouseX() == -1)
                 x = "N/A";
             else

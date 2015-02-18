@@ -11,7 +11,6 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
@@ -442,8 +441,32 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
             else if (e.getType() == Event.Type.LOOPEND)
             {
                 int number = -1;
-                for (int i = 0)
+                for (int i = 0; i < insideLoops.size(); i++)
+                {
+                    if (insideLoops.get(i) == e.getNumberOfLoopEvent())
+                    {
+                        number = i;
+                        break;
+                    }
+                }
+                if(number == -1)
+                {
+                    JOptionPane.showMessageDialog(null, "Start of loop " + e.getNumberOfLoopEvent() + " is missing.","Error",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                else
+                {
+                    insideLoops.remove(number);
+                }
             }
+        }
+        if (insideLoops.size() > 0)
+        {
+            for (int i : insideLoops)
+            {
+                JOptionPane.showMessageDialog(null,"End of loop " + i + " is missing.");
+            }
+            return;
         }
         Thread playIt = new Thread()
         {
@@ -551,13 +574,33 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                                         if (shift)
                                             robot.keyRelease(KeyEvent.VK_SHIFT);
                                     }
+                                break;
                                 case WAITFORCOLOR:
                                     while(goon)
                                     {
                                         if (list.get(j).getColor().toString().equals(robot.getPixelColor(list.get(j).getMouseX(), list.get(j).getMouseY()).toString()))
                                             break;
-                                        Thread.sleep(250);
+                                        Thread.sleep(200);
                                     }
+                                    break;
+                                case LOOPEND:
+                                    int loopEvent = list.get(j).getNumberOfLoopEvent();
+                                    int indexStartLoop = -1;
+                                    int m;
+                                    for (m = 0; m < j; m++)
+                                    {
+                                        if (list.get(m).getNumberOfLoopEvent() == loopEvent)
+                                        {
+                                            indexStartLoop = m;
+                                            break;
+                                        }
+                                    }
+                                    list.get(m).setNumberOfLoopsCompleted(list.get(m).getNumberOfLoopsCompleted()+1);
+                                    if (list.get(m).getNumberOfLoopsCompleted() < list.get(m).getNumberOfLoopTimes())
+                                    {
+                                        j = indexStartLoop;
+                                    }
+                                    break;
                                 default:
                                     break;
                             }
@@ -680,6 +723,39 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                     AddColorFrame acof = new AddColorFrame(i[0],e.getMinPause(),e.getMaxPause(),e.getMouseX(),e.getMouseY(),e.getColor());
                     acof.setLocationRelativeTo(null);
                     acof.setVisible(true);
+                case LOOP:
+                    int number ;
+                    boolean gevonden = false;
+                    int loopEvent = 0;
+                    while (!gevonden)
+                    {
+                        loopEvent++;
+                        gevonden = true;
+                        for (Event ev : DomainController.er.getEventList())
+                        {
+                            if (ev.getNumberOfLoopEvent() == loopEvent)
+                            {
+                                gevonden = false;
+                                break;
+                            }
+                        }
+                    }
+                    String s = JOptionPane.showInputDialog(null, "How many times would you like to loop?");
+                    int numberOfLoops = 0;
+                    try
+                    {
+                        numberOfLoops = Integer.parseInt(s);
+                        if (numberOfLoops < 1)
+                            throw new Exception();
+                    }
+                    catch(Exception exc)
+                    {
+                        JOptionPane.showMessageDialog(null, "You didn't enter a valid number of loops.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    DomainController.er.getEventList().get(i[0]).setNumberOfLoopTimes(numberOfLoops);
+                    tm.fireTableDataChanged();
+                    break;
                 default:
                     break;
             }
