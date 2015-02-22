@@ -158,6 +158,7 @@ public class Event implements java.io.Serializable
         this.setMaxPause(1);
         this.setNumberOfLoopEvent(numberOfLoop);
     }
+    
 
     
     

@@ -11,6 +11,7 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
@@ -28,7 +29,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     public int progressRun = 0, progressTotal = 0;
     public boolean goon = true;
     private Timer t;
-    private ArrayList<Integer> pressed = new ArrayList<>();
+    private List<Integer> pressed = new ArrayList<>();
     public Thread r = new Thread()
         {
 

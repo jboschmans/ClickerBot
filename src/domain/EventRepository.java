@@ -1,6 +1,7 @@
 package domain;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class EventRepository implements java.io.Serializable
@@ -77,6 +78,7 @@ public class EventRepository implements java.io.Serializable
                 break;
         }
     }
+    
     
     public void deleteEvent(int i)
     {
