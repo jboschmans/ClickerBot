@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -30,6 +31,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
      */
     public AddMoveMousePlusClickFrame(){
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         t = new Timer(100, new ActionListener()
         {
             @Override
@@ -51,6 +53,7 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
     public AddMoveMousePlusClickFrame(int i, String click, long minp, long maxp, int mx, int my)
     {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         switch (click)
         {
             case "left":

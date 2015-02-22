@@ -2,6 +2,7 @@ package domain;
 import ui.*;
 import data.*;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -25,6 +26,7 @@ public class DomainController
                     System.exit(0);
             }
         });
+        
         hf.setLocationRelativeTo(null);
         hf.setVisible(true);
     }

@@ -8,6 +8,7 @@ package ui;
 import domain.DomainController;
 import domain.Event;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +23,14 @@ public class InputStringFrame extends javax.swing.JFrame {
      */
     public InputStringFrame() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         jTextFieldInput.requestFocus();
     }
     
     public InputStringFrame(int i, String s, long minp, long maxp)
     {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         if (minp == maxp)
         {
             this.jTextFieldPause.setText(String.format("%d", minp));

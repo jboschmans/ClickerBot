@@ -9,6 +9,7 @@ import domain.DomainController;
 import domain.Event;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,11 +25,13 @@ public class AddOneKeyFrame extends javax.swing.JFrame {
      */
     public AddOneKeyFrame() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
     }
     
     public AddOneKeyFrame(int i, Event.Type ty, String key, long minp, long maxp)
     {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         switch (key)
         {
             case "escape":

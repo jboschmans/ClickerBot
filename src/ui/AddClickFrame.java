@@ -8,6 +8,7 @@ package ui;
 import domain.DomainController;
 import domain.Event;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,11 +24,13 @@ public class AddClickFrame extends javax.swing.JFrame {
     public AddClickFrame() {
         initComponents();
         jTextFieldPause.requestFocus();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
     }
     
     public AddClickFrame(int i, String click, long minp, long maxp)
     {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         switch (click)
         {
             case "left":

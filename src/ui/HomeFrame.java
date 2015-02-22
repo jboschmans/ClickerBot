@@ -8,10 +8,12 @@ import domain.DomainController;
 import domain.Event;
 import java.awt.Color;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
@@ -53,6 +55,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     
     public HomeFrame(){
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon16.png")).getImage());
         tm = new AbstractTableModel()
         {
             @Override

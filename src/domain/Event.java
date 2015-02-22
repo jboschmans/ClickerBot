@@ -10,7 +10,7 @@ public class Event implements java.io.Serializable
     private Color color = Color.WHITE;
     private long minPause, maxPause;
     private int mouseX, mouseY, numberOfLoopTimes = 0, numberOfLoopEvent = -1, numberOfLoopsCompleted = 0;
-    private boolean leftClick, rightClick, middleClick;
+    private boolean leftClick, rightClick, middleClick, fff;
     
     public Event(Type t, long p, boolean left, boolean right, boolean middle) // indien enkel click zonder random
     {
