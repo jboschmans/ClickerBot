@@ -268,7 +268,4 @@ public class Event implements java.io.Serializable
     public void setColor(Color color) {
         this.color = color;
     }
-    
-    
-    
 }

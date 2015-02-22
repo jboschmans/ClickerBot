@@ -143,6 +143,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -290,6 +291,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
             }
         });
         fileMenu.add(saveAsMenuItem);
+        fileMenu.add(jSeparator1);
 
         exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         exitMenuItem.setMnemonic('x');
@@ -936,6 +938,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     private javax.swing.JProgressBar jProgressBarRun;
     private javax.swing.JProgressBar jProgressBarTotal;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTable jTableEvents;
     private javax.swing.JTextField jTextFieldLoop;
     private javax.swing.JMenuBar menuBar;
