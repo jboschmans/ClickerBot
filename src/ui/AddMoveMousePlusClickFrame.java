@@ -89,6 +89,22 @@ public class AddMoveMousePlusClickFrame extends javax.swing.JFrame implements Ke
         this.jLabelY.setText(String.format("Y: %d", y));
         number = i;
         this.jButtonAdd.setText("Modify");
+        t = new Timer(100, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                if (jToggleButtonGetMouseLocation.isSelected())
+                {
+                    jLabelX.setText(String.format("X: %d", MouseInfo.getPointerInfo().getLocation().x));
+                    jLabelY.setText(String.format("Y: %d", MouseInfo.getPointerInfo().getLocation().y));
+                    x = MouseInfo.getPointerInfo().getLocation().x;
+                    y = MouseInfo.getPointerInfo().getLocation().y;
+                }
+            }
+        });
+        addKeyListener(this);
+        this.requestFocus();
     }
 
     /**
