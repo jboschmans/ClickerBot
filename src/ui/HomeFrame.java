@@ -120,6 +120,9 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEvents = new javax.swing.JTable();
         jProgressBarRun = new javax.swing.JProgressBar();
@@ -148,6 +151,14 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         saveAsMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("ClickerBot");
@@ -317,6 +328,18 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+
+        jMenu3.setText("Help");
+
+        jMenuItem1.setText("About");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        menuBar.add(jMenu3);
 
         setJMenuBar(menuBar);
 
@@ -750,6 +773,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
                     AddColorFrame acof = new AddColorFrame(i[0],e.getMinPause(),e.getMaxPause(),e.getMouseX(),e.getMouseY(),e.getColor());
                     acof.setLocationRelativeTo(null);
                     acof.setVisible(true);
+                    break;
                 case LOOP:
                     int number ;
                     boolean gevonden = false;
@@ -940,6 +964,12 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
         }
     }//GEN-LAST:event_jMenuItemNewActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        HelpFrame hf = new HelpFrame();
+        hf.setLocationRelativeTo(null);
+        hf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     
 
@@ -962,6 +992,11 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelRunPerc;
     private javax.swing.JLabel jLabelTotalPerc;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemNew;
     private javax.swing.JProgressBar jProgressBarRun;
     private javax.swing.JProgressBar jProgressBarTotal;

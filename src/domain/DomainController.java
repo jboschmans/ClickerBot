@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 public class DomainController
 {
+    private final static String version = "ClickerBot v1.0";
     public static HomeFrame hf;
     public static EventRepository er;
     public static void main(String[] args)
@@ -480,4 +481,10 @@ public class DomainController
     {
         DataController.open();
     }
+
+    public static String getVersion() {
+        return version;
+    }
+    
+    
 }
