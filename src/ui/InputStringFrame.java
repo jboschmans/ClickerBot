@@ -80,6 +80,7 @@ public class InputStringFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Click");
+        setResizable(false);
 
         jLabel1.setText("Pause:");
 

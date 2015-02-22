@@ -123,6 +123,7 @@ public class AddMoveMouseFrame extends javax.swing.JFrame implements KeyListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add MoveMouse");
+        setResizable(false);
 
         jButtonAdd.setText("Add");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {

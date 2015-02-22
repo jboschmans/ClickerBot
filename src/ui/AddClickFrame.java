@@ -92,6 +92,7 @@ public class AddClickFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Click");
+        setResizable(false);
 
         buttonGroupClick.add(jRadioButtonLeft);
         jRadioButtonLeft.setSelected(true);

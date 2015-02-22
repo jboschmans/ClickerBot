@@ -151,6 +151,7 @@ public class HomeFrame extends javax.swing.JFrame implements NativeKeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("ClickerBot");
+        setResizable(false);
 
         jTableEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
