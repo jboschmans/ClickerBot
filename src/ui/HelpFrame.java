@@ -6,6 +6,13 @@
 package ui;
 
 import domain.DomainController;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  *
@@ -19,7 +26,17 @@ public class HelpFrame extends javax.swing.JFrame {
     public HelpFrame() {
         initComponents();
         jLabel3.setText(String.format("Version: %s", DomainController.getVersion()));
-        jLabel4.setText(String.format("Website: %s", "http://www.google.com/"));
+        jLabel4.setText("<html>Website: <a href=#>www.clickerbot.eu</a></html>");
+        jLabel4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try
+                {
+                    Desktop.getDesktop().browse(new URI("http://clickerbot.eu/"));
+                } catch (URISyntaxException | IOException ex) {}
+            }
+        });
     }
 
     /**
