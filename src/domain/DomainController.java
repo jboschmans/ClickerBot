@@ -14,22 +14,32 @@ public class DomainController
     private final static String version = "ClickerBot v1.0";
     public static HomeFrame hf;
     public static EventRepository er;
+    public static String path = System.getProperty("user.dir");
     public static void main(String[] args)
     {
-        er = new EventRepository();
-        
-        hf = new HomeFrame();
-        hf.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we)
-            { 
-                if (JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? All unsaved progress will be lost.","Quit",JOptionPane.YES_NO_OPTION) == 0)
-                    System.exit(0);
-            }
-        });
-        
-        hf.setLocationRelativeTo(null);
-        hf.setVisible(true);
+        if (DataController.licenseExists(path))
+        {
+            er = new EventRepository();
+
+            hf = new HomeFrame();
+            hf.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent we)
+                { 
+                    if (JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? All unsaved progress will be lost.","Quit",JOptionPane.YES_NO_OPTION) == 0)
+                        System.exit(0);
+                }
+            });
+
+            hf.setLocationRelativeTo(null);
+            hf.setVisible(true);
+        }
+        else
+        {
+            CheckLicenseFrame clf = new CheckLicenseFrame();
+            clf.setLocationRelativeTo(null);
+            clf.setVisible(true);
+        }
     }
     
     public static void addEvent(Event.Type type, long minP, long maxP, int x, int y, boolean left, boolean right, boolean middle, String key, String string, Color color, int numberOfLoops, int loopEvent)
